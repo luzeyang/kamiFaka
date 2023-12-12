@@ -1,6 +1,5 @@
 #!/bin/sh
 echo '====^_^===='
-echo '欢迎使用佰阅发卡(KAMIFAKA)程序'
 
 
 if [ ${DB_TYPE} = 'Mysql' ];then
@@ -33,6 +32,6 @@ python init_mysql.py
 # TG发卡后台任务
 #python app_tg.py >/dev/null 2>&1 &
 
-echo '程序初始化完成'
+echo 'init finished'
 # ["gunicorn","-k", "gevent", "--bind", "0.0.0.0:8000", "--workers", "8", "app:app"]
 gunicorn -k gevent --bind 0.0.0.0:8000 --workers $(( 2 * `cat /proc/cpuinfo | grep 'core id' | wc -l` + 1 )) --log-level critical app:app
